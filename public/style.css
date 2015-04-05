@@ -1,0 +1,118 @@
+#wrapper {
+  background: -moz-linear-gradient(bottom, #f8f8f8, #C0DEED);
+  background: -webkit-linear-gradient(bottom, #f8f8f8, #C0DEED);
+  background: -o-linear-gradient(bottom, #f8f8f8, #C0DEED);
+  background: -ms-linear-gradient(bottom, #f8f8f8, #C0DEED);
+  min-height: 650px;
+}
+body {
+  font-family: 'Sintony';
+}
+.animal-link a:hover {
+  text-decoration: none !important;
+}
+.container > #content-area {
+  margin-top: 80px;
+}
+.title {
+	color: #555;
+}
+.sub-title {
+	font-size: 18px;
+	color: #888;
+}
+.btn-wide,
+.wide {
+	width: 100%;
+}
+.text-center {
+  text-align: center;
+}
+.user-profile {
+  font-family: 'Sintony';
+  font-size: 16px;
+  line-height: 80px;
+}
+.profile-wrapper {
+  background: rgba(255,255,255,.6);
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+textarea {
+  background: rgba(255,255,255,.6);
+  border: none;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  padding: 15px;
+}
+.profile-wrapper > .row {
+  padding: 10px;
+}
+.lbl {
+  color: #888;
+  padding: 0;
+  margin:0;
+  font-family: 'Sintony';
+  font-size: 12px;
+}
+.lbl-counter {
+  color: #6384F2;
+  font-family: 'Sintony';
+  font-size: 14px;
+}
+form[role=form] {
+	border: 1px solid #d1d1d1;
+	padding: 15px;
+}
+.postarea {
+  margin-top: 30px;
+}
+.post-wrapper {
+  margin: 5px 0;
+  background: rgba(255,255,255,.6);
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+.post-wrapper .uname,
+.post-wrapper .postbody {
+  padding: 5px 15px;
+}
+.post-wrapper .uname {
+  font-size: 90%;
+}
+.post-wrapper .postbody {
+  min-height: 40px;
+}
+.post-wrapper .dateposted {
+  padding: 2px 15px;
+  font-size: 90%;
+}
+
+.btn-fb {
+  color: #fff;
+  background-color: #884a90;
+  border-color: #8e6d88;
+}
+.btn-fb:hover,
+.btn-fb:focus,
+.btn-fb.focus,
+.btn-fb:active,
+.btn-fb.active,
+.open > .dropdown-toggle.btn-fb {
+  color: #fff;
+  background-color: #883a90;
+  border-color: #804d00;
+}
+.btn-fb:active,
+.btn-fb.active,
+.open > .dropdown-toggle.btn-fb {
+  background-image: none;
+}
+
+/*bootstrap override*/
+.navbar-default {
+  background: #FFF !important;
+}

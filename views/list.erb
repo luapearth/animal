@@ -1,0 +1,29 @@
+<div id="content-area">
+	
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="panel panel-default">
+			  <div class="panel-heading">
+					<h3 class="panel-title text-center">Who's using?</h3>
+			  </div>
+			  <div class="panel-body">
+					<% if !@users.nil? %>
+						<div class="list-group">
+							<% @users.each do |u|%>
+								<a href="/animal/user/<%= u.username %>" class="list-group-item">
+							    <h4 class="list-group-item-heading"><%= u.full_name %></h4>
+							    <p class="list-group-item-text">
+							    	<small>
+							    		<strong>Last seen: </strong><%= u.last_activity.strftime("%a %b %m %Y %I:%M:%S %p") %>
+							    	</small>
+							    </p>
+							  </a>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

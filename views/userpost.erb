@@ -1,0 +1,32 @@
+<div id="content-area">
+	<div class="row">
+			<div class="col-md-12">
+			<% if !@user.nil? %>
+
+				<% @user.posts.reverse.each do |p| %>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="post-wrapper">
+
+								<div class="uname">
+									<%= @user.full_name %>
+								</div>
+
+								<div class="postbody">
+								<%=h p.body %>
+								</div>
+
+								<div class="dateposted">
+									<small><%= p.created_at.strftime("%a %b %m %Y %I:%M:%S %p") %></small>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				<% end %>
+
+			<% else %>
+				<h1 class="text-center title">User not found!</h1>
+			<% end %>
+	</div>
+</div>
