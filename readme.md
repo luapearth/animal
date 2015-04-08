@@ -20,16 +20,6 @@ In this example I will be using `sqlite3` for simplicity.
 * PostgreSQL
 * Sqlite
 
-### Setup
-
-Create `const.rb` file that looks exactly like this
-```ruby
-# site title
-SITE_TITLE = 'Animal Wires'
-# session salt
-SALT = 'supersecret'
-```
-
 #### Facebook Oauth (optional)
 
 ##### Obtain Facebook App ID and App Secret to be able to use the Facebook Oauth built in to this code sample.
@@ -65,6 +55,7 @@ get '/fb/callback' do
 end
 ```
 
+At `views/login.erb` uncomment the following line of code
 ```html
 <div class="form-group">
 	<a href="/fblogin" class="btn btn-wide btn-fb"><i class="fa fa-facebook-official"></i> Sign in using Facebook</a>
