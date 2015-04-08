@@ -7,6 +7,10 @@ gem 'dm-sqlite-adapter'
 # web framework
 gem 'sinatra'
 
+gem 'sinatra-contrib'
+
+gem 'sinatra-flash'
+
 # password hash
 gem 'bcrypt'
 

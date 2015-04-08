@@ -5,10 +5,6 @@ require './const'
 Bundler.require(:default)
 
 
-enable :sessions
-configure do
-  set :session_secret, SALT
-end
 # helpers for escaping html tag
 helpers do
     include Rack::Utils
@@ -17,14 +13,30 @@ end
 
 
 class AnimalFlitter < Sinatra::Application
+	enable :sessions
+	configure do
+	  set :session_secret, SALT
+	end
 
 	#use Rack::Session::Cookie, secret: SALT
-
-	# home page, redirect user if already logged
 
 	def get_current_user user_id
 		User.get user_id
 	end
+
+	def find_user username
+		User.first(:username => username)
+	end
+
+	def set_session u
+		session['user_name'] = u.full_name
+		session['user_id'] = u.id
+
+		u.last_activity = Time.now
+		u.save
+	end
+
+	# home page, redirect user if already logged
 
 	get '/' do
 		if session['user_name']
@@ -38,17 +50,15 @@ class AnimalFlitter < Sinatra::Application
 
 			profile = @graph.get_object("me")
 			localuser = profile['first_name']
-			u = User.first(username: localuser)
+			u = find_user localuser
 			if u.nil?
 				nu = User.create :username => localuser, :password => profile['id'], :full_name => profile['name'], :last_activity => Time.now
-				session['user_name'] = nu.full_name
-				session['user_id'] = nu.id
+				
+				set_session nu
 				redirect '/animal'
 			else
-				session['user_name'] = u.full_name
-				session['user_id'] = u.id
-				u.last_activity = Time.now
-				u.save
+				set_session u
+
 				redirect '/animal'
 			end
 		else
@@ -59,18 +69,22 @@ class AnimalFlitter < Sinatra::Application
 
 	# user login
 	post '/login' do
-		u = User.first(username: params['username'])
-		if u.nil?
-			redirect '/'
-		elsif u.authenticate(params['password'])
-			session['user_name'] = u.full_name
-			session['user_id'] = u.id
-			u.last_activity = Time.now
-			u.save
-			redirect '/animal'
+		if params[:username] != "" && params[:password] != ""
+			"Hello World"
 		else
-			redirect '/'
+			flash[:error] = "Username or Password cannot be empty"
+			redirect back
 		end
+		# u = find_user params['username']
+		# if u.nil?
+		# 	redirect '/'
+		# elsif u.authenticate(params['password'])
+		# 	set_session u
+
+		# 	redirect '/animal'
+		# else
+		# 	redirect '/'
+		# end
 	end
 
 	# logout user and redirect to home page
@@ -82,12 +96,11 @@ class AnimalFlitter < Sinatra::Application
 	# register new user and redirect to /animal page after
 	# registration is complete
 	post '/register' do
-		u = User.first(username: params['reg_username'])
+		u = find_user params['reg_username']
 		if u.nil?
 			nu = User.create(:username => params['reg_username'], :password => params['reg_password'], :full_name => params['reg_fullname'])
 			if !nu.nil?
-				session['user_name'] = nu.full_name
-				session['user_id'] = nu.id
+				set_session nu
 				redirect '/animal'
 			else
 				redirect '/'
@@ -106,7 +119,6 @@ class AnimalFlitter < Sinatra::Application
 			erb :animal	
 		else
 			@users = User.all
-			puts @users.inspect
 			erb :list
 		end
 	end
@@ -129,16 +141,16 @@ class AnimalFlitter < Sinatra::Application
   # this is call using jquery ajax
   post '/newpost' do
   	@user = get_current_user session['user_id']
-  	
+
   	p = Post.create(:body => params['postbody'], :created_at => Time.now, :user => @user)
   	@user.posts.reload
   end
 
   # animal user splat handle user search
   # display all post associated to the user
-  get '/animal/user/*' do
+  get '/animal/user/:username' do
   	@title = SITE_TITLE
-  	@user = User.first(:username => params['splat'][0])
+  	@user = find_user params[:username]
   	erb :userpost
   end
 

@@ -116,3 +116,7 @@ form[role=form] {
 .navbar-default {
   background: #FFF !important;
 }
+
+.alert {
+  font-size: 80%;
+}
