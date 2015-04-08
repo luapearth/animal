@@ -39,7 +39,7 @@ class AnimalFlitter < Sinatra::Application
 	# home page, redirect user if already logged
 
 	get '/' do
-		if session['user_name']
+		if session['user_id']
 			redirect '/animal'
 		end
 
@@ -99,6 +99,11 @@ class AnimalFlitter < Sinatra::Application
 		u = find_user params['reg_username']
 		if u.nil?
 			nu = User.create(:username => params['reg_username'], :password => params['reg_password'], :full_name => params['reg_fullname'])
+			if !nu.errors.nil?
+				nu.errors.each do |e|
+					puts "#{e}"
+				end
+			end
 			if !nu.nil?
 				set_session nu
 				redirect '/animal'
