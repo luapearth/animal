@@ -27,3 +27,5 @@ gem 'shotgun'
 
 # gem 'pg'
 # gem 'dm-postgres-adapter'
+
+ruby "2.2.1"

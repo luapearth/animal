@@ -90,6 +90,17 @@ form[role=form] {
   padding: 2px 15px;
   font-size: 90%;
 }
+.error-box {
+  background: rgba(255,255,255,.6);
+  min-height: 250px;
+  line-height: 100px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
 
 .btn-fb {
   color: #fff;
