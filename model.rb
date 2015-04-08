@@ -11,10 +11,11 @@ class User
 	include BCrypt
 
 	property :id, Serial, :key => true
-	property :username, String, :length => 3..50
+	property :username, String, length: 3..50, required: true
 	property :password, BCryptHash
-	property :full_name, String
+	property :full_name, String, required: true
 	property :last_activity, DateTime
+	property :facebook_id, Integer
 
 	has n, :posts
 

@@ -22,16 +22,54 @@ In this example I will be using `sqlite3` for simplicity.
 
 ### Setup
 
-* Declare a site Title by replace the `SITE_TITLE` at the `const.rb`
-* Replace the SALT value with something else, where going to use that SALT for session cookie.
+Create `const.rb` file that looks exactly like this
+```ruby
+# site title
+SITE_TITLE = 'Animal Wires'
+# session salt
+SALT = 'supersecret'
+```
 
-#### Facebook Oauth
+#### Facebook Oauth (optional)
 
 ##### Obtain Facebook App ID and App Secret to be able to use the Facebook Oauth built in to this code sample.
 
 * Visit [Facebook Developers](https://developers.facebook.com) web site and create a new app.
 
-* Edit the `const.rb` file and replace the `APP_ID` and `APP_SECRET` value
+Add the following code to your `const.rb` file and replace the value of `APP_ID` and `APP_SECRET` that you get from your facebook app.
+
+```ruby
+# facebook app id
+APP_ID = 12334345462
+# facebook app secret
+APP_SECRET = 'd1cd3c....'
+```
+
+Find the following code in `app.rb` file and uncomment if your going to use facebook oauth
+```ruby
+if session['access_token']
+	@graph = Koala::Facebook::API.new(session['access_token'])
+
+	profile = @graph.get_object("me")
+
+	............
+	............
+end
+
+get '/fblogin' do
+	............
+end
+
+get '/fb/callback' do
+	............
+end
+```
+
+```html
+<div class="form-group">
+	<a href="/fblogin" class="btn btn-wide btn-fb"><i class="fa fa-facebook-official"></i> Sign in using Facebook</a>
+</div>
+```
 
 ### Run the app
 
