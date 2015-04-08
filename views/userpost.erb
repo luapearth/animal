@@ -1,32 +1,75 @@
 <div id="content-area">
+
 	<div class="row">
+		<div class="col-md-3 col-md-offset-1" style="margin-top:10px;">
 			<div class="col-md-12">
-			<% if !@user.nil? %>
+				<div class="profile-wrapper">
 
-				<% @user.posts.reverse.each do |p| %>
+					<p class="text-center">
+				   	<strong class="user-profile"><%= @user.full_name %></strong>
+				  </p>
+
 					<div class="row">
-						<div class="col-md-12">
-							<div class="post-wrapper">
-
-								<div class="uname">
-									<%= @user.full_name %>
-								</div>
-
-								<div class="postbody">
-								<%=h p.body %>
-								</div>
-
-								<div class="dateposted">
-									<small><%= p.created_at.strftime("%a %b %m %Y %I:%M:%S %p") %></small>
-								</div>
-
-							</div>
+						<div class="col-md-6">
+							<p class="lbl">
+								POST
+							</p>
+							<p class="lbl-counter">
+								<%= @count %>
+							</p>
 						</div>
 					</div>
-				<% end %>
 
-			<% else %>
-				<h1 class="text-center title">User not found!</h1>
-			<% end %>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md-7" style="margin-top:10px;">
+			<div>
+				<div class="col-md-12">
+					<% if !@user.nil? %>
+						<% if @user.posts.count > 0 %>
+							<% @user.posts.reverse.each do |p| %>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="post-wrapper">
+
+											<div class="uname">
+												<%= @user.full_name %>
+											</div>
+
+											<div class="postbody">
+											<%=h p.body %>
+											</div>
+
+											<div class="dateposted">
+												<small><%= p.created_at.strftime("%a %b %m %Y %I:%M:%S %p") %></small>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							<% end %>
+						<% else %>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+									<div class="col-md-12">
+										<div class="post-wrapper">
+											<div class="postbody" style="line-height: 40px;">
+												<h3 class="text-center">No found post.</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
 	</div>
+
 </div>
