@@ -10,7 +10,7 @@ This app is built using Ruby with Sinatra micro-framework
 ### Database
 In this example I will be using `sqlite3` for simplicity.
 
-* If prepared using MySQL database using need to create the database first, uncomment the example code at `model.rb` that uses MySQL database and replace the credentials accordingly.
+* If prepared using MySQL database using need to create the database first, uncomment the example code at `model.rb` that uses MySQL database and replace the credentials accordingly also edit the `Gemfile` and uncomment `gem mysql2` and `gem dm-mysql-adapter`.
 
 * No need to worry for the database schema, data_mapper gem will do the job.
 

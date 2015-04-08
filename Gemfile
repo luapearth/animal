@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # database
-# gem 'sqlite3'
-# gem 'dm-sqlite-adapter'
+gem 'sqlite3'
+gem 'dm-sqlite-adapter'
 
 # web framework
 gem 'sinatra'
@@ -18,8 +18,8 @@ gem 'koala'
 
 gem 'shotgun'
 
-gem 'mysql2'
-gem 'dm-mysql-adapter'
+# gem 'mysql2'
+# gem 'dm-mysql-adapter'
 
 # gem 'pg'
 # gem 'dm-postgres-adapter'
