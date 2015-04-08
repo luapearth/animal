@@ -1,19 +1,14 @@
 require 'bundler'
 require './model'
+require './const'
 
 Bundler.require(:default)
 
-# your app id
-APP_ID     = 815494625193332
-# your app secret
-APP_SECRET = 'd1cd3c11bdb8d544b11dc517c8a189ba'
-
-SITE_TITLE = "Animal"
-
-SALT = 'maxkwala'
 
 enable :sessions
-
+configure do
+  set :session_secret, SALT
+end
 # helpers for escaping html tag
 helpers do
     include Rack::Utils
@@ -23,7 +18,7 @@ end
 
 class AnimalFlitter < Sinatra::Application
 
-	use Rack::Session::Cookie, secret: SALT
+	#use Rack::Session::Cookie, secret: SALT
 
 	# home page, redirect user if already logged
 	get '/' do
