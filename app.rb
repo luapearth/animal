@@ -21,6 +21,11 @@ class AnimalFlitter < Sinatra::Application
 	#use Rack::Session::Cookie, secret: SALT
 
 	# home page, redirect user if already logged
+
+	def get_current_user user_id
+		User.get user_id
+	end
+
 	get '/' do
 		if session['user_name']
 			redirect '/animal'
@@ -96,7 +101,7 @@ class AnimalFlitter < Sinatra::Application
 	get '/animal' do
 		@title = SITE_TITLE
 		if session['user_id']
-			@user = User.get session['user_id']
+			@user = get_current_user session['user_id']
 			@count = @user.posts.count if !@user.nil?
 			erb :animal	
 		else
@@ -123,7 +128,8 @@ class AnimalFlitter < Sinatra::Application
   # new post page handles the creatation of new post
   # this is call using jquery ajax
   post '/newpost' do
-  	@user = User.get session['user_id']
+  	@user = get_current_user session['user_id']
+  	
   	p = Post.create(:body => params['postbody'], :created_at => Time.now, :user => @user)
   	@user.posts.reload
   end
