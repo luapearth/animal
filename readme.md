@@ -5,7 +5,7 @@ This app is built using Ruby with Sinatra micro-framework
 
 * `git clone https://github.com/luapearth/animal.git /your/path/appname` or `git clone https://github.com/luapearth/animal.git your-app-name`
 * `cd to /your/path/appname`
-Run `bundle install`
+* Run `bundle install`
 
 ### Database
 In this example I will be using `sqlite3` for simplicity.
