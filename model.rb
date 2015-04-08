@@ -1,9 +1,9 @@
 require 'data_mapper'
 require 'bcrypt'
 
-# DataMapper.setup(:default, (ENV["DATABASE_URL"] || "sqlite://#{Dir.pwd}/flitter_development.sqlite"))
-# DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/animalflitter')
-DataMapper.setup(:default, (ENV['DATABASE_URL'] || 'mysql://af:flitanimal@localhost/animalflitter'))
+DataMapper.setup(:default, (ENV["DATABASE_URL"] || "sqlite://#{Dir.pwd}/animal_wires.sqlite"))
+# DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://host/databasename')
+# DataMapper.setup(:default, (ENV['DATABASE_URL'] || 'mysql://username:password@host/databasename'))
 
 # User table definition
 class User
