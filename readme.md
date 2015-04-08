@@ -35,7 +35,7 @@ In this example I will be using `sqlite3` for simplicity.
 
 ### Run the app
 
-* simple run the command `bundle exec rackup config.ru` in your `terminal` or `command prompt` in windows.
+* simply run the command `bundle exec rackup config.ru` in your `terminal` or `command prompt` in windows.
 * visit the running site @ [http://localhost:9292](http://localhost:9292)
 
-*For any issues / suggestions please email johnpaul.g.delmundo@gmail.com *
+* For any issues / suggestions please email johnpaul.g.delmundo@gmail.com *
