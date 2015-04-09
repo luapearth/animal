@@ -34,16 +34,12 @@
 									<div class="col-md-12">
 										<div class="post-wrapper">
 
-											<div class="uname">
-												<%= @user.full_name %>
+											<div class="dateposted">
+												<small><%=format_date p.created_at %></small>
 											</div>
 
 											<div class="postbody">
 											<%=h p.body %>
-											</div>
-
-											<div class="dateposted">
-												<small><%=format_date p.created_at %></small>
 											</div>
 
 										</div>
