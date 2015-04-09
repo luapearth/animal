@@ -7,8 +7,13 @@ Bundler.require(:default)
 
 # helpers for escaping html tag
 helpers do
-    include Rack::Utils
-    alias_method :h, :escape_html
+  include Rack::Utils
+  alias_method :h, :escape_html
+
+  def format_date date_time
+  	date_time.strftime("%A, %B %m, %Y")
+  end
+
 end
 
 
@@ -176,6 +181,11 @@ class AnimalFlitter < Sinatra::Application
 
   	p = Post.create(:body => params['postbody'], :created_at => Time.now, :user => @user)
   	@user.posts.reload
+
+  	# return json response containing the last post
+  	dateposted =  format_date p.created_at
+  	postbody = h p.body
+  	json(created_at: dateposted, body: postbody)
   end
 
   # animal user splat handle user search

@@ -28,12 +28,12 @@
 		<div class="col-md-7" style="margin-top:10px;">
 			<div class="col-md-12">
 				<input type="hidden" id="user_fullname" value="<%= @user.full_name %>">
-				<textarea rows="3" name="newpost" id="newpost" class="wide" placeholder="What's up?"></textarea>
+				<textarea rows="3" name="newpost" id="newpost" class="wide" placeholder="What's up?" maxlength="200"></textarea>
 			</div>
-			<div class="col-md-12">
+			<!-- <div class="col-md-12">
 					<div class="pullright" style="font-size: 10px;">(Maximum characters: 200) You have <input readonly type="text" id="countdown" name="countdown" size="3" value="200"> characters left.
 					</div>
-			</div>
+			</div> -->
 			<div class="col-md-12">
 				<div class="form-group">
 					<button type="submit" name="posted" id="posted" class="btn btn-primary btn-sm">Post</button>
@@ -48,17 +48,12 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="post-wrapper">
-
-										<div class="uname">
-											<%= @user.full_name %>
+										<div class="dateposted">
+											<small><%=format_date p.created_at %></small>
 										</div>
 
 										<div class="postbody">
 										<%=h p.body %>
-										</div>
-
-										<div class="dateposted">
-											<small><%= p.created_at.strftime("%a %b %m %Y %I:%M:%S %p") %></small>
 										</div>
 
 									</div>
@@ -80,7 +75,7 @@
 		<div class="col-md-12">
 			<div class="post-wrapper">
 
-				<div class="uname">
+				<div class="dateposted">
 					
 				</div>
 
@@ -88,45 +83,33 @@
 				
 				</div>
 
-				<div class="dateposted">
-					
-				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
 
+<% content_for :scripts do %>
 <script>
 	$(function() {
-		$('#newpost').keyup(function(e) {
-			var self = $(this);
-			if (self.val().length > $('#countdown').val()) {
-				self.val( self.val().substring(0, 200) );
-			} else {
-				$('#countdown').val( 200 - self.val().length );
-			}
+		// $('#newpost').keyup(function(e) {
+		// 	var self = $(this);
+		// 	if (self.val().length > $('#countdown').val()) {
+		// 		self.val( self.val().substring(0, 200) );
+		// 	} else {
+		// 		$('#countdown').val( 200 - self.val().length );
+		// 	}
+		// });
+		$('#newpost').maxlength({
+			max: 200
 		});
 
 		$('#posted').click(function(e) {
 			if ($('#newpost').val() != "") {
 
-				$('#tmpl .uname').empty().html( $('#user_fullname').val() );
-				$('#tmpl .dateposted').empty().html( '<small>' + new Date() + '</small>' );
-				var newpost = $.trim($('#newpost').val());
-				$('#tmpl .postbody').empty().text( newpost );
-				$('.lbl-counter').html( parseInt($('.lbl-counter').html()) + 1 );
+				// $('#tmpl .uname').empty().html( $('#user_fullname').val() );
 				// $('.postarea .col-md-12:first').prepend($('#tmpl').html());
-
-				$('#pl').after($('#tmpl').html());
-				var itemNew = $('.postarea .col-md-12:first').find('.row.new-item');
-				itemNew.removeAttr("style").removeClass('new-item');
-
-				$('.postarea .col-md-12:first').find('.row.new-item').slideDown("slow");
-
-				$('#newpost').val("");
-				$('#countdown').val( 200 );
-
+				var newpost = $.trim($('#newpost').val());
+				
 				$.ajax({
 					url: '/newpost',
 					method: 'POST',
@@ -134,10 +117,24 @@
 						postbody: newpost
 					},
 					success: function(resp) {
-						console.log(resp);
+						
+						$('#tmpl .dateposted').empty().html( '<small>' + resp.created_at + '</small>' );
+						$('#tmpl .postbody').empty().html( resp.body );
+						$('.lbl-counter').html( parseInt($('.lbl-counter').html()) + 1 );
+
+						$('#pl').after($('#tmpl').html());
+						var itemNew = $('.postarea .col-md-12:first').find('.row.new-item');
+						itemNew.removeAttr("style").removeClass('new-item');
+
+						$('.postarea .col-md-12:first').find('.row.new-item').slideDown("slow");
+
+						$('#newpost').val("");
+						$('.maxlength-feedback').html( "200 characters remaining (200 maximum)" );
+
 					}
 				});
 			}
 		});
 	});
 </script>
+<% end %>

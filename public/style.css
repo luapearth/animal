@@ -78,17 +78,19 @@ form[role=form] {
 }
 .post-wrapper .uname,
 .post-wrapper .postbody {
-  padding: 5px 15px;
+  padding: 15px;
 }
 .post-wrapper .uname {
   font-size: 90%;
 }
 .post-wrapper .postbody {
   min-height: 40px;
+  font-size: 95%;
 }
 .post-wrapper .dateposted {
   padding: 2px 15px;
   font-size: 90%;
+  border-bottom: 1px solid #e9e9e9;
 }
 .error-box {
   background: rgba(255,255,255,.6);
@@ -101,7 +103,9 @@ form[role=form] {
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
-
+.maxlength-feedback {
+  font-size: 80% !important;
+}
 .btn-fb {
   color: #fff;
   background-color: #884a90;

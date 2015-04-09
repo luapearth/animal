@@ -14,7 +14,7 @@
 							    <h4 class="list-group-item-heading"><%= u.full_name %></h4>
 							    <p class="list-group-item-text">
 							    	<small>
-							    		<strong>Last seen: </strong><%= u.last_activity.strftime("%a %b %m %Y %I:%M:%S %p") %>
+							    		<strong>Last seen: </strong><%= u.last_activity.strftime("%a %b %m %Y %I:%M:%S %p") unless u.last_activity.nil? %>
 							    	</small>
 							    </p>
 							  </a>

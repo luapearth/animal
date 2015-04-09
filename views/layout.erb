@@ -6,10 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 	<link href="http://www.google.com/fonts#QuickUsePlace:quickUse/Family:Sintony">
+	<link rel="stylesheet" href="jquery.maxlength.css">
 	<link rel="stylesheet" type="text/css" href="/style.css">
-
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -45,6 +43,12 @@
 
 	</div>
 
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.plugin.min.js"></script>
+	<script src="/js/jquery.maxlength.min.js"></script>
+	<%= yield_content :scripts %>
 	<script>
 		$(function() {
 			$('#search').keyup(function(e) {
